@@ -73,7 +73,7 @@ def main() :
         proj_1d = pd.DataFrame(umap_2d.transform(sample1))
         proj_2d['lable']=y_train
         proj_1d['lable']=y_test
-        st.write(set(proj_2d[["lable"]))
+        st.write(set(proj_2d["lable"]))
         return proj_2d, proj_1d
     #@st.cache
     def box_plotly(brute_app, data_test, chk_id):
