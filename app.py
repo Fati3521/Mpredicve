@@ -131,12 +131,12 @@ def main() :
     #if st.checkbox("Show customer information ?"):
         prediction = load_prediction(data_test, chk_id, clf)
         st.write("**Comportement:**",prediction)
-        #X = data_test.iloc[:, :-1]
         data_app1, data_test1=load_umap(data_app, data_test,chk_id)
         data_app1["taille"]=1
         data_test1["lable"]=2
         data_test1["taille"]=3
         XX=pd.concat([data_test1, data_app1])
+        st.write(set(XX["lable"]))
         fig_2d = px.scatter(XX, x=0, y=1, color=XX["lable"], labels={'color': 'lable'}, size="taille")
         #fig_2d.update_layout(showlegend=False)
         st.plotly_chart(fig_2d)
