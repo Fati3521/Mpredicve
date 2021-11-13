@@ -61,8 +61,6 @@ def main() :
     #@st.cache
     def load_umap(train, sample, id):
         sample=sample[sample["numero ouverture"] == id]
-        y_train=train['defaut'].tolist()
-        y_test=sample['defaut'].tolist()
         scaler1=load_scaler()
         sample[['acc_x','acc_y']] = scaler1.transform(sample[['acc_x','acc_y']])
         sample1=extrac_features(sample[['acc_x','acc_y']].reset_index(drop = True))
@@ -70,9 +68,10 @@ def main() :
         train1=feat(train.reset_index(drop = True))
         #train1=extrac_features(train[['acc_x','acc_y']].reset_index(drop = True))
         umap_2d = UMAP(n_components=2, init='random', random_state=0)
-        proj_2d = pd.DataFrame(umap_2d.fit_transform(train1))
+        proj_2d = pd.DataFrame(umap_2d.fit_transform(train1.iloc[:,:-1]))
         proj_1d = pd.DataFrame(umap_2d.transform(sample1))
-        st.write(set(proj_2d["lable"]))
+        proj_2d['defaut']=train1['defaut']
+        st.write(set(proj_2d["defaut"]))
         return proj_2d, proj_1d
     #@st.cache
     def box_plotly(brute_app, data_test, chk_id):
