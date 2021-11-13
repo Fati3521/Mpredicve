@@ -16,7 +16,7 @@ def main() :
 
     #@st.cache
     def load_data_app():
-        data=pd.read_csv(r"all_data8.csv", sep=";")
+        data=pd.read_csv(r"data_app_brute.csv", sep=";")
         return data
     
     #@st.cache
