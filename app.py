@@ -136,7 +136,8 @@ def main() :
         data_test1["lable"]=2
         data_test1["taille"]=3
         XX=pd.concat([data_test1, data_app1])
-        st.write(set(XX["lable"]))
+        st.write(set(data_app["lable"]))
+        st.write(set(data_app1["lable"]))
         fig_2d = px.scatter(XX, x=0, y=1, color=XX["lable"], labels={'color': 'lable'}, size="taille")
         #fig_2d.update_layout(showlegend=False)
         st.plotly_chart(fig_2d)
