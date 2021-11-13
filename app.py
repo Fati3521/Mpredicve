@@ -61,8 +61,8 @@ def main() :
     #@st.cache
     def load_umap(train, sample, id):
         sample=sample[sample["numero ouverture"] == id]
-        y_train=train['defaut']
-        y_test=sample['defaut']
+        y_train=train['defaut'].tolist()
+        y_test=sample['defaut'].tolist()
         scaler1=load_scaler()
         sample[['acc_x','acc_y']] = scaler1.transform(sample[['acc_x','acc_y']])
         sample1=extrac_features(sample[['acc_x','acc_y']].reset_index(drop = True))
