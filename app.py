@@ -67,7 +67,7 @@ def main() :
         sample[['acc_x','acc_y']] = scaler1.transform(sample[['acc_x','acc_y']])
         sample1=extrac_features(sample[['acc_x','acc_y']].reset_index(drop = True))
         train[['acc_x','acc_y']] = scaler1.transform(train[['acc_x','acc_y']])
-        train1=feat(train[['acc_x','acc_y']].reset_index(drop = True))
+        train1=feat(train.reset_index(drop = True))
         #train1=extrac_features(train[['acc_x','acc_y']].reset_index(drop = True))
         umap_2d = UMAP(n_components=2, init='random', random_state=0)
         proj_2d = pd.DataFrame(umap_2d.fit_transform(train1))
