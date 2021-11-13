@@ -104,6 +104,17 @@ def extrac_features(data):
         i=i+200
     data_final= pd.concat(liste,ignore_index=True)
     return data_final
+def feat(data):
+    data_final=[]
+    for i in set(data['angle']):
+        for j in set(data['obs']):
+            data1=data[(data['angle']==i) & (data['obs']==j)]
+            data2i=extrac_features(data1[['acc_x','acc_y']])
+            data2i["defaut"]=data1["defaut"].tolist()[0]
+            #data2i["numero ouverture"]=data1["numero ouverture"].tolist()[0]
+            data_final.append(data2i)
+    data22=pd.concat(data_final, ignore_index=True)
+    return data22
 
 def create_dataset_kmean(X, y,angle, obs, time_steps=1, step=1):
     Xs, ys, Angle, Obs = [], [], [], []
