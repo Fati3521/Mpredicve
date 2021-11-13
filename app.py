@@ -67,12 +67,11 @@ def main() :
         sample[['acc_x','acc_y']] = scaler1.transform(sample[['acc_x','acc_y']])
         sample1=extrac_features(sample[['acc_x','acc_y']].reset_index(drop = True))
         train[['acc_x','acc_y']] = scaler1.transform(train[['acc_x','acc_y']])
-        train1=extrac_features(train[['acc_x','acc_y']].reset_index(drop = True))
+        train1=feat(train[['acc_x','acc_y']].reset_index(drop = True))
+        #train1=extrac_features(train[['acc_x','acc_y']].reset_index(drop = True))
         umap_2d = UMAP(n_components=2, init='random', random_state=0)
         proj_2d = pd.DataFrame(umap_2d.fit_transform(train1))
         proj_1d = pd.DataFrame(umap_2d.transform(sample1))
-        proj_2d['lable']=y_train
-        proj_1d['lable']=y_test
         st.write(set(proj_2d["lable"]))
         return proj_2d, proj_1d
     #@st.cache
@@ -134,12 +133,12 @@ def main() :
         st.write("**Comportement:**",prediction)
         data_app1, data_test1=load_umap(data_app, data_test,chk_id)
         data_app1["taille"]=1
-        data_test1["lable"]=2
+        data_test1["defaut"]=2
         data_test1["taille"]=3
         XX=pd.concat([data_test1, data_app1])
         st.write(set(data_app["defaut"]))
-        st.write(set(data_app1["lable"]))
-        fig_2d = px.scatter(XX, x=0, y=1, color=XX["lable"], labels={'color': 'lable'}, size="taille")
+        st.write(set(data_app1["defaut"]))
+        fig_2d = px.scatter(XX, x=0, y=1, color=XX["defaut"], labels={'color': 'lable'}, size="taille")
         #fig_2d.update_layout(showlegend=False)
         st.plotly_chart(fig_2d)
     
