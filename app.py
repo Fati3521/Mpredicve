@@ -56,8 +56,8 @@ def main() :
         data=pretraitement(sample, id)
         score = clf.predict(data)[0]
         comp="normal" if score==0 else "anormal"
-        return score
-
+        return comp
+    
     #@st.cache
     def load_umap(train, sample, id):
         sample=sample[sample["numero ouverture"] == id]
@@ -71,7 +71,6 @@ def main() :
         proj_2d = pd.DataFrame(umap_2d.fit_transform(train1.iloc[:,:-1]))
         proj_1d = pd.DataFrame(umap_2d.transform(sample1))
         proj_2d['defaut']=train1['defaut']
-        st.write(set(proj_2d["defaut"]))
         return proj_2d, proj_1d
     #@st.cache
     def box_plotly(brute_app, data_test, chk_id):
@@ -99,7 +98,7 @@ def main() :
     <div style="background-color: tomato; padding:10px; border-radius:10px">
     <h1 style="color: white; text-align:center">MAINTENANCE PREDICTIVE</h1>
     </div>
-    <p style="font-size: 20px; font-weight: bold; text-align:center">INTERPRETATION MODELE PREDICTIF</p>
+    <p style="font-size: 20px; font-weight: bold; text-align:center">INTERPRETATION DU MODELE PREDICTIF</p>
     """
     
     st.markdown(html_temp, unsafe_allow_html=True)
@@ -125,7 +124,7 @@ def main() :
     #Display Customer ID from Sidebar
   
     #Customer solvability display
-    st.header("**ANALYSE PREDICTION**")
+    st.header("**ANALYSE DES PREDICTIONS**")
     if st.button('Prediction'):
     #if st.checkbox("Show customer information ?"):
         prediction = load_prediction(data_test, chk_id, clf)
@@ -134,9 +133,6 @@ def main() :
         data_app1["taille"]=1
         data_test1["defaut"]=2
         data_test1["taille"]=3
-        XX=pd.concat([data_test1, data_app1])
-        st.write(set(data_app["defaut"]))
-        st.write(set(data_app1["defaut"]))
         fig_2d = px.scatter(XX, x=0, y=1, color=XX["defaut"], labels={'color': 'lable'}, size="taille")
         #fig_2d.update_layout(showlegend=False)
         st.plotly_chart(fig_2d)
