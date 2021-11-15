@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
-        return data
+       
 
 import shap
 from fonction import *
@@ -34,6 +34,7 @@ def main() :
         data[['acc_x','acc_y']] = scaler1.transform(data[['acc_x','acc_y']])
         data.loc[data["defaut"]==0,"defaut"]="normal"
         data.loc[data["defaut"]==1,"defaut"]="anormal"
+        return data
     #@st.cache
     def load_model():
         model=joblib.load(r"strealit_model.sav")
@@ -154,8 +155,10 @@ def main() :
         
     else:
         st.markdown("<i>…</i>", unsafe_allow_html=True)
-    X=pretraitement(data_test, chk_id)   
-    if st.checkbox("Interpretation niveau local Niveau 1"):
+        
+    if st.checkbox("Interpretation niveau local Niveau 1?"):
+        X=pretraitement(data_test, chk_id)   
+        if st.checkbox("Interpretation niveau local Niveau 1"):
         fig, ax = plt.subplots()
  
         explainer = shap.TreeExplainer(load_model())
