@@ -132,7 +132,7 @@ def main() :
         data_app1, data_test1=load_umap(data_app, data_test,chk_id)
         data_app1["taille"]=1
         data_test1["defaut"]=2
-        data_test1["taille"]=3
+        data_test1["taille"]=5
         fig_2d = px.scatter(XX, x=0, y=1, color=XX["defaut"], labels={'color': 'lable'}, size="taille")
         #fig_2d.update_layout(showlegend=False)
         st.plotly_chart(fig_2d)
