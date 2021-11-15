@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
+        return data
+
 import shap
 from fonction import *
 import plotly.express as px
@@ -32,8 +34,6 @@ def main() :
         data[['acc_x','acc_y']] = scaler1.transform(data[['acc_x','acc_y']])
         data.loc[data["defaut"]==0,"defaut"]="normal"
         data.loc[data["defaut"]==1,"defaut"]="anormal"
-        return data
-
     #@st.cache
     def load_model():
         model=joblib.load(r"strealit_model.sav")
@@ -98,8 +98,9 @@ def main() :
     <div style="background-color: tomato; padding:10px; border-radius:10px">
     <h1 style="color: white; text-align:center">MAINTENANCE PREDICTIVE</h1>
     </div>
-    <p style="font-size: 20px; font-weight: bold; text-align:center">INTERPRETATION DU MODELE PREDICTIF</p>
+    <p style="font-size: 20px; font-weight: bold; text-align:center">INTERPRETATION MODELE PREDICTIF</p>
     """
+    
     
     st.markdown(html_temp, unsafe_allow_html=True)
     
