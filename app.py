@@ -155,10 +155,9 @@ def main() :
         
     else:
         st.markdown("<i>…</i>", unsafe_allow_html=True)
-        
-    if st.checkbox("Interpretation niveau local Niveau 1?"):
-        X=pretraitement(data_test, chk_id)   
-        if st.checkbox("Interpretation niveau local Niveau 1"):
+              
+    X=pretraitement(data_test, chk_id)   
+    if st.checkbox("Interpretation niveau local Niveau 1"):
         fig, ax = plt.subplots()
  
         explainer = shap.TreeExplainer(load_model())
