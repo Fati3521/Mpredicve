@@ -145,7 +145,7 @@ def main() :
     if st.checkbox("Interpretation niveau global ?"):
         shap.initjs()
         X=pretraitement(data_test, chk_id)
-        number = st.slider("Pick a number of features…", 0, 20, 5)
+        #number = st.slider("Pick a number of features…", 0, 20, 5)
         fig, ax = plt.subplots(figsize=(10, 10))
         explainer = shap.TreeExplainer(load_model())
         shap_values = explainer.shap_values(X)
